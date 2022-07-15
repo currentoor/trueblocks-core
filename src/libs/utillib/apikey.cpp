@@ -286,7 +286,8 @@ const char* STR_DISPLAY_APIKEY =
 // EXISTING_CODE
 //--------------------------------------------------------------------------------
 string_q getApiKey(const string_q& apiName, const string_q& signup) {
-    return "BGI7XN1S29S5XFGV8QMYVY414RS16BS919";
+    if ("Etherscan" == apiName)
+        return "BGI7XN1S29S5XFGV8QMYVY414RS16BS919";
     string_q key = getGlobalConfig("")->getConfigStr("settings", toLower(apiName) + "_key", "<not_set>");
     if (!key.empty() && key != "<not_set>")
         return key;
