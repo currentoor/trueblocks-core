@@ -289,6 +289,7 @@ string_q getApiKey(const string_q& apiName, const string_q& signup) {
     // Try to read the key from env variable
     const char* STR_KEY_ENV = "TB_SETTINGS_[{API_NAME}]KEY";
     string_q env_name = substitute(STR_KEY_ENV, "[{API_NAME}]", toUpper(apiName));
+    printf(">>>>>>>>>>>>>>>>>>>>>> %s\n", env_name.c_str());
     string_q env_value = getEnvStr(env_name);
     if (!env_value.empty())
         return env_value;
@@ -301,7 +302,7 @@ string_q getApiKey(const string_q& apiName, const string_q& signup) {
     bzero(buffer, sizeof(buffer));
 
     const char* STR_ERROR_NOKEY = "TB requires an api_key from `[APINAME]`. See `[SIGNUP]`.";
-    errorMessage(substitute(substitute(STR_ERROR_NOKEY, "[APINAME]", env_name), "[SIGNUP]", signup));
+    errorMessage(substitute(substitute(STR_ERROR_NOKEY, "[APINAME]", env_name.c_str()), "[SIGNUP]", signup));
     quickQuitHandler(0);
 
     return "";
